@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Page 5 - Consent</title>
+    <script src="data.js"></script>
+
+    <style>
+        canvas {
+            border: 2px solid black;
+            background: #fff;
+            touch-action: none; /* mobile support */
+        }
+    </style>
+</head>
+<body>
+
+<h2>Consent Form</h2>
+
+<p>
+I have read and agree to participate in this study.
+</p>
+
+<div id="summary"></div>
+
+<form id="form5">
+
+<label>
+<input type="checkbox" name="consent" required>
+I agree
+</label>
+
+<br><br>
+
+<h3>Digital Signature</h3>
+<p>Please sign in the box below:</p>
+
+<canvas id="signaturePad" width="400" height="200"></canvas>
+
+<br><br>
+
+<button type="button" onclick="clearCanvas()">Clear Signature</button>
+
+<br><br>
+
+<button type="button" onclick="window.location='page4.html'">Back</button>
+<button type="submit">Submit</button>
+
+</form>
+
+<script>
+const canvas = document.getElementById("signaturePad");
+const ctx = canvas.getContext("2d");
+
+let drawing = false;
+
+// ====== DRAW FUNCTIONS ======
+function startDraw(e) {
+    drawing = true;
+    ctx.beginPath();
+    ctx.moveTo(getX(e), getY(e));
+}
+
+function draw(e) {
+    if (!drawing) return;
+    ctx.lineTo(getX(e), getY(e));
+    ctx.stroke();
+}
+
+function stopDraw() {
+    drawing = false;
+}
+
+// ====== TOUCH + MOUSE SUPPORT ======
+function getX(e) {
+    return e.touches ? e.touches[0].clientX - canvas.offsetLeft : e.offsetX;
+}
+
+function getY(e) {
+    return e.touches ? e.touches[0].clientY - canvas.offsetTop : e.offsetY;
+}
+
+// Mouse events
+canvas.addEventListener("mousedown", startDraw);
+canvas.addEventListener("mousemove", draw);
+canvas.addEventListener("mouseup", stopDraw);
+canvas.addEventListener("mouseleave", stopDraw);
+
+// Touch events
+canvas.addEventListener("touchstart", startDraw);
+canvas.addEventListener("touchmove", draw);
+canvas.addEventListener("touchend", stopDraw);
+
+// ====== CLEAR ======
+function clearCanvas() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+}
+
+function downloadFile(filename, data, type) {
+    const blob = data instanceof Blob ? data : new Blob([data], { type });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+}
+
+function downloadSurveyFiles(signatureData) {
+    return new Promise((resolve) => {
+        const data = getSurveyData();
+        data.signature = signatureData;
+        downloadFile("survey-data.json", JSON.stringify(data, null, 2), "application/json");
+
+        canvas.toBlob(function(blob) {
+            if (blob) {
+                downloadFile("signature.png", blob, "image/png");
+            }
+            resolve();
+        }, "image/png");
+    });
+}
+
+window.addEventListener("DOMContentLoaded", function() {
+    populateForm("form5");
+
+    const data = getSurveyData();
+    const summary = document.getElementById("summary");
+
+    if (Object.keys(data).length) {
+        summary.innerHTML = "<h3>Saved form data</h3><ul>" +
+            Object.entries(data)
+                .filter(([key]) => key !== "signature")
+                .map(([key, value]) => `<li><strong>${key}</strong>: ${value}</li>`)
+                .join("") +
+            "</ul>";
+    } else {
+        summary.innerHTML = "<p>No saved responses were found yet.</p>";
+    }
+});
+
+// ====== SUBMIT ======
+document.getElementById("form5").onsubmit = function(e) {
+    e.preventDefault();
+
+    const consent = document.querySelector('input[name="consent"]').checked;
+
+    if (!consent) {
+        alert("You must agree before submitting.");
+        return;
+    }
+
+    const signatureData = canvas.toDataURL();
+
+    if (signatureData.length < 2000) {
+        alert("Please provide a signature.");
+        return;
+    }
+
+    saveData({
+        consent: consent,
+        signature: signatureData
+    });
+
+    downloadSurveyFiles(signatureData).then(() => {
+        alert("Form submitted successfully! Your survey data and signature image have been downloaded.");
+        clearSavedData();
+        window.location.href = "page1.html";
+    });
+};
+</script>
+
+</body>
+</html>

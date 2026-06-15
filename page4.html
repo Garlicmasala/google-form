@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Page 4</title>
+    <script src="data.js"></script>
+</head>
+<body>
+
+<h2>Attitude & Screening</h2>
+
+<form id="form4">
+
+<label>Chronic diseases are preventable:</label>
+<select name="att1" required>
+<option value="Strongly agree">Strongly agree</option>
+<option value="Agree">Agree</option>
+<option value="Disagree">Disagree</option>
+<option value="Strongly disagree">Strongly disagree</option>
+</select>
+
+<br><br>
+
+<label>Have body check before?</label>
+<select name="check" required>
+<option value="Yes">Yes</option>
+<option value="No">No</option>
+</select>
+
+<br><br>
+
+<label>Willing to improve health?</label>
+<select name="willing" required>
+<option value="Yes">Yes</option>
+<option value="No">No</option>
+</select>
+
+<br><br>
+
+<h3>Demographics</h3>
+
+<label>Education:</label>
+<select name="edu" required>
+<option value="Primary or below">Primary or below</option>
+<option value="Secondary">Secondary</option>
+<option value="Tertiary">Tertiary</option>
+</select>
+
+<br><br>
+
+<label>Marital status:</label>
+<select name="marital" required>
+<option value="Single">Single</option>
+<option value="Married">Married</option>
+<option value="Divorced">Divorced</option>
+</select>
+
+<br><br>
+
+<button type="button" onclick="window.location='page3.html'">Back</button>
+<button type="submit">Next</button>
+
+</form>
+
+<script>
+window.addEventListener("DOMContentLoaded", function() {
+    populateForm("form4");
+});
+
+document.getElementById("form4").onsubmit = function(e) {
+    e.preventDefault();
+    saveData(Object.fromEntries(new FormData(this).entries()));
+    window.location.href = "page5.html";
+};
+</script>
+
+</body>
+</html>

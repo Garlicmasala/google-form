@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Page 2</title>
+    <script src="data.js"></script>
+</head>
+<body>
+
+<h2>Personal Information</h2>
+
+<form id="form2">
+
+<label>Age group:</label>
+<select name="age" required>
+    <option value="18-25">18-25</option>
+    <option value="26-35">26-35</option>
+    <option value="36-45">36-45</option>
+</select>
+
+<br><br>
+
+<label>Gender:</label>
+<select name="gender" required>
+    <option value="Male">Male</option>
+    <option value="Female">Female</option>
+</select>
+
+<h3>Knowledge of Chronic Disease</h3>
+
+<label>Number of diseases known:</label>
+<select name="knowledge1" required>
+<option value="0">0</option>
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+</select>
+
+<br><br>
+
+<label>Know prevention?</label>
+<select name="knowledge2">
+<option>Yes</option>
+<option>No</option>
+</select>
+
+<br><br>
+
+<label>Risk behaviours known:</label>
+<select name="knowledge3">
+<option>0</option>
+<option>1</option>
+<option>2</option>
+<option>3</option>
+<option>4</option>
+</select>
+
+<br><br>
+
+<button type="button" onclick="window.location='page1.html'">Back</button>
+<button type="submit">Next</button>
+
+</form>
+
+<script>
+window.addEventListener("DOMContentLoaded", function() {
+    populateForm("form2");
+});
+
+document.getElementById("form2").onsubmit = function(e) {
+    e.preventDefault();
+    const data = Object.fromEntries(new FormData(this).entries());
+    saveData(data);
+    window.location.href = "page3.html";
+};
+</script>
+
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Page 3</title>
+    <script src="data.js"></script>
+</head>
+<body>
+
+<h2>Behaviour</h2>
+
+<form id="form3">
+
+<label>Days eat fruits (0–7):</label>
+<input type="number" name="fruit" min="0" max="7" required>
+
+<br><br>
+
+<label>Days eat vegetables (0–7):</label>
+<input type="number" name="veg" min="0" max="7" required>
+
+<br><br>
+
+<label>Days vigorous exercise:</label>
+<input type="number" name="vig_days" min="0" required>
+
+<br><br>
+
+<label>Minutes per day (vigorous):</label>
+<input type="number" name="vig_minutes" min="0" required>
+
+<br><br>
+
+<label>Alcohol in past year?</label>
+<select name="alcohol" required>
+<option value="Yes">Yes</option>
+<option value="No">No</option>
+</select>
+
+<br><br>
+
+<label>Smoking?</label>
+<select name="smoke" required>
+<option value="Yes">Yes</option>
+<option value="No">No</option>
+</select>
+
+<br><br>
+
+<button type="button" onclick="window.location='page2.html'">Back</button>
+<button type="submit">Next</button>
+
+</form>
+
+<script>
+window.addEventListener("DOMContentLoaded", function() {
+    populateForm("form3");
+});
+
+document.getElementById("form3").onsubmit = function(e) {
+    e.preventDefault();
+    saveData(Object.fromEntries(new FormData(this).entries()));
+    window.location.href = "page4.html";
+};
+</script>
+
+</body>
+</html>
