@@ -7,10 +7,10 @@
 </head>
 <body>
 
-<h2>Consent Form</h2>
+<h2>同意书</h2>
 
 <p>
-I have read and agree to participate in this study.
+我已阅读并同意参加本研究。
 </p>
 
 <div id="summary"></div>
@@ -19,23 +19,23 @@ I have read and agree to participate in this study.
 
 <label>
 <input type="checkbox" name="consent" required>
-I agree
+我同意
 </label>
 
 <br><br>
 
-<h3>Digital Signature</h3>
-<p>Please sign in the box below:</p>
+<h3>数字签名</h3>
+<p>请在下面的框中签名:</p>
 
 <canvas id="signaturePad" width="400" height="200"></canvas>
 
 <br><br>
 
-<button type="button" onclick="clearCanvas()">Clear Signature</button>
+<button type="button" onclick="clearCanvas()">清除签名</button>
 
 <div class="button-group">
-<button type="button" onclick="window.location='page4.html'">Back</button>
-<button type="submit">Submit</button>
+<button type="button" onclick="window.location='page4.html'">返回</button>
+<button type="submit">提交</button>
 </div>
 
 </form>
@@ -122,14 +122,14 @@ window.addEventListener("DOMContentLoaded", function() {
     const summary = document.getElementById("summary");
 
     if (Object.keys(data).length) {
-        summary.innerHTML = "<h3>Saved form data</h3><ul>" +
+        summary.innerHTML = "<h3>已保存的表单数据</h3><ul>" +
             Object.entries(data)
                 .filter(([key]) => key !== "signature")
                 .map(([key, value]) => `<li><strong>${key}</strong>: ${value}</li>`)
                 .join("") +
             "</ul>";
     } else {
-        summary.innerHTML = "<p>No saved responses were found yet.</p>";
+        summary.innerHTML = "<p>尚未找到已保存的回复。</p>";
     }
 });
 
@@ -140,14 +140,14 @@ document.getElementById("form5").onsubmit = function(e) {
     const consent = document.querySelector('input[name="consent"]').checked;
 
     if (!consent) {
-        alert("You must agree before submitting.");
+        alert("提交前您必须同意。");
         return;
     }
 
     const signatureData = canvas.toDataURL();
 
     if (signatureData.length < 2000) {
-        alert("Please provide a signature.");
+        alert("请提供签名。");
         return;
     }
 
@@ -157,7 +157,7 @@ document.getElementById("form5").onsubmit = function(e) {
     });
 
     downloadSurveyFiles(signatureData).then(() => {
-        alert("Form submitted successfully! Your survey data and signature image have been downloaded.");
+        alert("表单已成功提交!您的调查数据和签名图像已下载。");
         clearSavedData();
         window.location.href = "page1.html";
     });
