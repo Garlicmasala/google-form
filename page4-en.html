@@ -8,62 +8,62 @@
 <body>
 
 <div style="text-align: right; margin-bottom: 20px;">
-    <button onclick="switchLanguage()" style="background: #0277BD; padding: 8px 16px; color: white; border: none; border-radius: 4px; cursor: pointer;">切換語言</button>
+    <button onclick="switchLanguage()" style="background: #0277BD; padding: 8px 16px; color: white; border: none; border-radius: 4px; cursor: pointer;">Change Language</button>
 </div>
 
-<h2>态度和筛查</h2>
+<h2>Attitude & Screening</h2>
 
 <form id="form4">
 
-<label>慢性病是可以预防的:</label>
+<label>Chronic diseases are preventable:</label>
 <select name="att1" required>
-<option value="Strongly agree">强烈同意</option>
-<option value="Agree">同意</option>
-<option value="Disagree">不同意</option>
-<option value="Strongly disagree">强烈不同意</option>
+<option value="Strongly agree">Strongly agree</option>
+<option value="Agree">Agree</option>
+<option value="Disagree">Disagree</option>
+<option value="Strongly disagree">Strongly disagree</option>
 </select>
 
 <br><br>
 
-<label>之前做过身体检查?</label>
+<label>Have body check before?</label>
 <select name="check" required>
-<option value="Yes">是</option>
-<option value="No">否</option>
+<option value="Yes">Yes</option>
+<option value="No">No</option>
 </select>
 
 <br><br>
 
-<label>愿意改善健康?</label>
+<label>Willing to improve health?</label>
 <select name="willing" required>
-<option value="Yes">是</option>
-<option value="No">否</option>
+<option value="Yes">Yes</option>
+<option value="No">No</option>
 </select>
 
 <br><br>
 
-<h3>人口统计信息</h3>
+<h3>Demographics</h3>
 
-<label>教育:</label>
+<label>Education:</label>
 <select name="edu" required>
-<option value="Primary or below">小学或以下</option>
-<option value="Secondary">中学</option>
-<option value="Tertiary">大学</option>
+<option value="Primary or below">Primary or below</option>
+<option value="Secondary">Secondary</option>
+<option value="Tertiary">Tertiary</option>
 </select>
 
 <br><br>
 
-<label>婚姻状况:</label>
+<label>Marital status:</label>
 <select name="marital" required>
-<option value="Single">单身</option>
-<option value="Married">已婚</option>
-<option value="Divorced">离异</option>
+<option value="Single">Single</option>
+<option value="Married">Married</option>
+<option value="Divorced">Divorced</option>
 </select>
 
 <br><br>
 
 <div class="button-group">
-<button type="button" onclick="window.location='page3.html'">返回</button>
-<button type="submit">下一步</button>
+<button type="button" onclick="navigateToPage('page3.html')">Back</button>
+<button type="submit">Next</button>
 </div>
 
 </form>
@@ -71,7 +71,7 @@
 <script>
 function switchLanguage() {
     const langs = ['en', 'zh-simple', 'zh-trad'];
-    const currentLang = localStorage.getItem('preferredLanguage') || 'zh-simple';
+    const currentLang = localStorage.getItem('preferredLanguage') || 'en';
     const currentIndex = langs.indexOf(currentLang);
     const nextIndex = (currentIndex + 1) % langs.length;
     localStorage.setItem('preferredLanguage', langs[nextIndex]);
@@ -79,7 +79,7 @@ function switchLanguage() {
 }
 
 function navigateToPage(page) {
-    const lang = localStorage.getItem('preferredLanguage') || 'zh-simple';
+    const lang = localStorage.getItem('preferredLanguage') || 'en';
     const langSuffix = lang === 'en' ? '-en' : (lang === 'zh-trad' ? '-zh-trad' : '-zh-simple');
     const baseName = page.replace('.html', '');
     window.location.href = baseName + langSuffix + '.html';

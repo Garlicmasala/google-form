@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Page 2</title>
+    <title>第2頁</title>
     <link rel="stylesheet" href="styles.css">
     <script src="data.js"></script>
 </head>
@@ -11,11 +11,11 @@
     <button onclick="switchLanguage()" style="background: #0277BD; padding: 8px 16px; color: white; border: none; border-radius: 4px; cursor: pointer;">切換語言</button>
 </div>
 
-<h2>个人信息</h2>
+<h2>個人信息</h2>
 
 <form id="form2">
 
-<label>年龄组:</label>
+<label>年齡組:</label>
 <select name="age" required>
     <option value="18-25">18-25</option>
     <option value="26-35">26-35</option>
@@ -24,15 +24,15 @@
 
 <br><br>
 
-<label>性别:</label>
+<label>性別:</label>
 <select name="gender" required>
     <option value="Male">男</option>
     <option value="Female">女</option>
 </select>
 
-<h3>对慢性病的了解</h3>
+<h3>對慢性病的了解</h3>
 
-<label>已知疾病数:</label>
+<label>已知疾病數:</label>
 <select name="knowledge1" required>
 <option value="0">0</option>
 <option value="1">1</option>
@@ -43,7 +43,7 @@
 
 <br><br>
 
-<label>了解预防?</label>
+<label>了解預防?</label>
 <select name="knowledge2">
 <option>是</option>
 <option>否</option>
@@ -51,7 +51,7 @@
 
 <br><br>
 
-<label>已知风险行为:</label>
+<label>已知風險行為:</label>
 <select name="knowledge3">
 <option>0</option>
 <option>1</option>
@@ -63,7 +63,7 @@
 <br><br>
 
 <div class="button-group">
-<button type="button" onclick="window.location='page1.html'">返回</button>
+<button type="button" onclick="navigateToPage('page1.html')">返回</button>
 <button type="submit">下一步</button>
 </div>
 
@@ -72,7 +72,7 @@
 <script>
 function switchLanguage() {
     const langs = ['en', 'zh-simple', 'zh-trad'];
-    const currentLang = localStorage.getItem('preferredLanguage') || 'zh-simple';
+    const currentLang = localStorage.getItem('preferredLanguage') || 'zh-trad';
     const currentIndex = langs.indexOf(currentLang);
     const nextIndex = (currentIndex + 1) % langs.length;
     localStorage.setItem('preferredLanguage', langs[nextIndex]);
@@ -80,7 +80,7 @@ function switchLanguage() {
 }
 
 function navigateToPage(page) {
-    const lang = localStorage.getItem('preferredLanguage') || 'zh-simple';
+    const lang = localStorage.getItem('preferredLanguage') || 'zh-trad';
     const langSuffix = lang === 'en' ? '-en' : (lang === 'zh-trad' ? '-zh-trad' : '-zh-simple');
     const baseName = page.replace('.html', '');
     window.location.href = baseName + langSuffix + '.html';

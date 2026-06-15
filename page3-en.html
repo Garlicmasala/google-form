@@ -8,52 +8,52 @@
 <body>
 
 <div style="text-align: right; margin-bottom: 20px;">
-    <button onclick="switchLanguage()" style="background: #0277BD; padding: 8px 16px; color: white; border: none; border-radius: 4px; cursor: pointer;">切換語言</button>
+    <button onclick="switchLanguage()" style="background: #0277BD; padding: 8px 16px; color: white; border: none; border-radius: 4px; cursor: pointer;">Change Language</button>
 </div>
 
-<h2>行为</h2>
+<h2>Behaviour</h2>
 
 <form id="form3">
 
-<label>吃水果的天数 (0–7):</label>
+<label>Days eat fruits (0–7):</label>
 <input type="number" name="fruit" min="0" max="7" required>
 
 <br><br>
 
-<label>吃蔬菜的天数 (0–7):</label>
+<label>Days eat vegetables (0–7):</label>
 <input type="number" name="veg" min="0" max="7" required>
 
 <br><br>
 
-<label>剧烈运动的天数:</label>
+<label>Days vigorous exercise:</label>
 <input type="number" name="vig_days" min="0" required>
 
 <br><br>
 
-<label>每天分钟数 (剧烈运动):</label>
+<label>Minutes per day (vigorous):</label>
 <input type="number" name="vig_minutes" min="0" required>
 
 <br><br>
 
-<label>过去一年内饮酒?</label>
+<label>Alcohol in past year?</label>
 <select name="alcohol" required>
-<option value="Yes">是</option>
-<option value="No">否</option>
+<option value="Yes">Yes</option>
+<option value="No">No</option>
 </select>
 
 <br><br>
 
-<label>吸烟?</label>
+<label>Smoking?</label>
 <select name="smoke" required>
-<option value="Yes">是</option>
-<option value="No">否</option>
+<option value="Yes">Yes</option>
+<option value="No">No</option>
 </select>
 
 <br><br>
 
 <div class="button-group">
-<button type="button" onclick="window.location='page2.html'">返回</button>
-<button type="submit">下一步</button>
+<button type="button" onclick="navigateToPage('page2.html')">Back</button>
+<button type="submit">Next</button>
 </div>
 
 </form>
@@ -61,7 +61,7 @@
 <script>
 function switchLanguage() {
     const langs = ['en', 'zh-simple', 'zh-trad'];
-    const currentLang = localStorage.getItem('preferredLanguage') || 'zh-simple';
+    const currentLang = localStorage.getItem('preferredLanguage') || 'en';
     const currentIndex = langs.indexOf(currentLang);
     const nextIndex = (currentIndex + 1) % langs.length;
     localStorage.setItem('preferredLanguage', langs[nextIndex]);
@@ -69,7 +69,7 @@ function switchLanguage() {
 }
 
 function navigateToPage(page) {
-    const lang = localStorage.getItem('preferredLanguage') || 'zh-simple';
+    const lang = localStorage.getItem('preferredLanguage') || 'en';
     const langSuffix = lang === 'en' ? '-en' : (lang === 'zh-trad' ? '-zh-trad' : '-zh-simple');
     const baseName = page.replace('.html', '');
     window.location.href = baseName + langSuffix + '.html';

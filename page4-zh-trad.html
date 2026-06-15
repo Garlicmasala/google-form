@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Page 4</title>
+    <title>第4頁</title>
     <link rel="stylesheet" href="styles.css">
     <script src="data.js"></script>
 </head>
@@ -11,21 +11,21 @@
     <button onclick="switchLanguage()" style="background: #0277BD; padding: 8px 16px; color: white; border: none; border-radius: 4px; cursor: pointer;">切換語言</button>
 </div>
 
-<h2>态度和筛查</h2>
+<h2>態度和篩查</h2>
 
 <form id="form4">
 
-<label>慢性病是可以预防的:</label>
+<label>慢性病是可以預防的:</label>
 <select name="att1" required>
-<option value="Strongly agree">强烈同意</option>
+<option value="Strongly agree">強烈同意</option>
 <option value="Agree">同意</option>
 <option value="Disagree">不同意</option>
-<option value="Strongly disagree">强烈不同意</option>
+<option value="Strongly disagree">強烈不同意</option>
 </select>
 
 <br><br>
 
-<label>之前做过身体检查?</label>
+<label>之前做過身體檢查?</label>
 <select name="check" required>
 <option value="Yes">是</option>
 <option value="No">否</option>
@@ -33,7 +33,7 @@
 
 <br><br>
 
-<label>愿意改善健康?</label>
+<label>願意改善健康?</label>
 <select name="willing" required>
 <option value="Yes">是</option>
 <option value="No">否</option>
@@ -41,28 +41,28 @@
 
 <br><br>
 
-<h3>人口统计信息</h3>
+<h3>人口統計信息</h3>
 
 <label>教育:</label>
 <select name="edu" required>
-<option value="Primary or below">小学或以下</option>
-<option value="Secondary">中学</option>
-<option value="Tertiary">大学</option>
+<option value="Primary or below">小學或以下</option>
+<option value="Secondary">中學</option>
+<option value="Tertiary">大學</option>
 </select>
 
 <br><br>
 
-<label>婚姻状况:</label>
+<label>婚姻狀況:</label>
 <select name="marital" required>
-<option value="Single">单身</option>
+<option value="Single">單身</option>
 <option value="Married">已婚</option>
-<option value="Divorced">离异</option>
+<option value="Divorced">離異</option>
 </select>
 
 <br><br>
 
 <div class="button-group">
-<button type="button" onclick="window.location='page3.html'">返回</button>
+<button type="button" onclick="navigateToPage('page3.html')">返回</button>
 <button type="submit">下一步</button>
 </div>
 
@@ -71,7 +71,7 @@
 <script>
 function switchLanguage() {
     const langs = ['en', 'zh-simple', 'zh-trad'];
-    const currentLang = localStorage.getItem('preferredLanguage') || 'zh-simple';
+    const currentLang = localStorage.getItem('preferredLanguage') || 'zh-trad';
     const currentIndex = langs.indexOf(currentLang);
     const nextIndex = (currentIndex + 1) % langs.length;
     localStorage.setItem('preferredLanguage', langs[nextIndex]);
@@ -79,7 +79,7 @@ function switchLanguage() {
 }
 
 function navigateToPage(page) {
-    const lang = localStorage.getItem('preferredLanguage') || 'zh-simple';
+    const lang = localStorage.getItem('preferredLanguage') || 'zh-trad';
     const langSuffix = lang === 'en' ? '-en' : (lang === 'zh-trad' ? '-zh-trad' : '-zh-simple');
     const baseName = page.replace('.html', '');
     window.location.href = baseName + langSuffix + '.html';

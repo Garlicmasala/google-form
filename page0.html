@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Language Selection / 语言选择</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .language-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            flex-direction: column;
+        }
+
+        .language-title {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 2.5em;
+            color: #01579B;
+        }
+
+        .language-buttons {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 900px;
+        }
+
+        .language-btn {
+            background: linear-gradient(135deg, #FF9800 0%, #FB8C00 100%);
+            color: white;
+            padding: 30px 40px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1.3em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 24px rgba(255, 152, 0, 0.3);
+            min-width: 200px;
+            text-align: center;
+        }
+
+        .language-btn:hover {
+            background: linear-gradient(135deg, #FB8C00 0%, #F57C00 100%);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(255, 152, 0, 0.4);
+        }
+
+        .language-btn:active {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(255, 152, 0, 0.3);
+        }
+
+        .language-subtitle {
+            text-align: center;
+            font-size: 1.1em;
+            color: #555;
+            margin-bottom: 40px;
+        }
+
+        .flag {
+            font-size: 2em;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="language-container">
+    <div class="language-title">Select Language / 选择语言</div>
+    
+    <div class="language-subtitle">Please choose your preferred language</div>
+    
+    <div class="language-buttons">
+        <button class="language-btn" onclick="setLanguage('en')">
+            <span class="flag">🇬🇧</span>English
+        </button>
+        
+        <button class="language-btn" onclick="setLanguage('zh-simple')">
+            <span class="flag">🇨🇳</span>简体中文
+        </button>
+        
+        <button class="language-btn" onclick="setLanguage('zh-trad')">
+            <span class="flag">🇭🇰</span>繁體中文
+        </button>
+    </div>
+</div>
+
+<script>
+function setLanguage(lang) {
+    localStorage.setItem('preferredLanguage', lang);
+    const langSuffix = lang === 'en' ? '-en' : (lang === 'zh-trad' ? '-zh-trad' : '-zh-simple');
+    window.location.href = 'page1' + langSuffix + '.html';
+}
+
+// Check if user already has a language preference
+window.addEventListener('DOMContentLoaded', function() {
+    const lang = localStorage.getItem('preferredLanguage');
+    if (lang) {
+        const langSuffix = lang === 'en' ? '-en' : (lang === 'zh-trad' ? '-zh-trad' : '-zh-simple');
+        window.location.href = 'page1' + langSuffix + '.html';
+    }
+});
+</script>
+
+</body>
+</html>

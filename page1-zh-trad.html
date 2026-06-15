@@ -11,15 +11,15 @@
     <button onclick="switchLanguage()" style="background: #0277BD; padding: 8px 16px; color: white; border: none; border-radius: 4px; cursor: pointer;">切換語言</button>
 </div>
 
-<h2>资格检查</h2>
+<h2>資格檢查</h2>
 
 <form id="form1">
 
-<h3>1. 年龄 18–45 岁?</h3>
+<h3>1. 年齡 18–45 歲?</h3>
 <label><input type="radio" name="q1" value="yes" required> 是</label>
 <label><input type="radio" name="q1" value="no"> 否</label>
 
-<h3>2. 从事医学相关的学习/工作?</h3>
+<h3>2. 從事醫學相關的學習/工作?</h3>
 <label><input type="radio" name="q2" value="yes" required> 是</label>
 <label><input type="radio" name="q2" value="no"> 否</label>
 
@@ -36,7 +36,7 @@
 <script>
 function switchLanguage() {
     const langs = ['en', 'zh-simple', 'zh-trad'];
-    const currentLang = localStorage.getItem('preferredLanguage') || 'zh-simple';
+    const currentLang = localStorage.getItem('preferredLanguage') || 'zh-trad';
     const currentIndex = langs.indexOf(currentLang);
     const nextIndex = (currentIndex + 1) % langs.length;
     localStorage.setItem('preferredLanguage', langs[nextIndex]);
@@ -44,7 +44,7 @@ function switchLanguage() {
 }
 
 function navigateToPage(page) {
-    const lang = localStorage.getItem('preferredLanguage') || 'zh-simple';
+    const lang = localStorage.getItem('preferredLanguage') || 'zh-trad';
     const langSuffix = lang === 'en' ? '-en' : (lang === 'zh-trad' ? '-zh-trad' : '-zh-simple');
     const baseName = page.replace('.html', '');
     window.location.href = baseName + langSuffix + '.html';
@@ -62,12 +62,12 @@ document.getElementById("form1").onsubmit = function(e) {
     const q3 = document.querySelector('input[name="q3"]:checked');
 
     if (!q1 || !q2 || !q3) {
-        alert("请回答所有问题。");
+        alert("請回答所有問題。");
         return;
     }
 
     if (q1.value === "no" || q2.value === "yes" || q3.value === "yes") {
-        alert("您不符合资格。谢谢。");
+        alert("您不符合資格。謝謝。");
         return;
     }
 

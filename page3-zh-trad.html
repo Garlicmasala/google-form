@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Page 3</title>
+    <title>第3頁</title>
     <link rel="stylesheet" href="styles.css">
     <script src="data.js"></script>
 </head>
@@ -11,31 +11,31 @@
     <button onclick="switchLanguage()" style="background: #0277BD; padding: 8px 16px; color: white; border: none; border-radius: 4px; cursor: pointer;">切換語言</button>
 </div>
 
-<h2>行为</h2>
+<h2>行為</h2>
 
 <form id="form3">
 
-<label>吃水果的天数 (0–7):</label>
+<label>吃水果的天數 (0–7):</label>
 <input type="number" name="fruit" min="0" max="7" required>
 
 <br><br>
 
-<label>吃蔬菜的天数 (0–7):</label>
+<label>吃蔬菜的天數 (0–7):</label>
 <input type="number" name="veg" min="0" max="7" required>
 
 <br><br>
 
-<label>剧烈运动的天数:</label>
+<label>劇烈運動的天數:</label>
 <input type="number" name="vig_days" min="0" required>
 
 <br><br>
 
-<label>每天分钟数 (剧烈运动):</label>
+<label>每天分鐘數 (劇烈運動):</label>
 <input type="number" name="vig_minutes" min="0" required>
 
 <br><br>
 
-<label>过去一年内饮酒?</label>
+<label>過去一年內飲酒?</label>
 <select name="alcohol" required>
 <option value="Yes">是</option>
 <option value="No">否</option>
@@ -43,7 +43,7 @@
 
 <br><br>
 
-<label>吸烟?</label>
+<label>吸煙?</label>
 <select name="smoke" required>
 <option value="Yes">是</option>
 <option value="No">否</option>
@@ -52,7 +52,7 @@
 <br><br>
 
 <div class="button-group">
-<button type="button" onclick="window.location='page2.html'">返回</button>
+<button type="button" onclick="navigateToPage('page2.html')">返回</button>
 <button type="submit">下一步</button>
 </div>
 
@@ -61,7 +61,7 @@
 <script>
 function switchLanguage() {
     const langs = ['en', 'zh-simple', 'zh-trad'];
-    const currentLang = localStorage.getItem('preferredLanguage') || 'zh-simple';
+    const currentLang = localStorage.getItem('preferredLanguage') || 'zh-trad';
     const currentIndex = langs.indexOf(currentLang);
     const nextIndex = (currentIndex + 1) % langs.length;
     localStorage.setItem('preferredLanguage', langs[nextIndex]);
@@ -69,7 +69,7 @@ function switchLanguage() {
 }
 
 function navigateToPage(page) {
-    const lang = localStorage.getItem('preferredLanguage') || 'zh-simple';
+    const lang = localStorage.getItem('preferredLanguage') || 'zh-trad';
     const langSuffix = lang === 'en' ? '-en' : (lang === 'zh-trad' ? '-zh-trad' : '-zh-simple');
     const baseName = page.replace('.html', '');
     window.location.href = baseName + langSuffix + '.html';

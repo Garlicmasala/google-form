@@ -8,14 +8,14 @@
 <body>
 
 <div style="text-align: right; margin-bottom: 20px;">
-    <button onclick="switchLanguage()" style="background: #0277BD; padding: 8px 16px; color: white; border: none; border-radius: 4px; cursor: pointer;">切換語言</button>
+    <button onclick="switchLanguage()" style="background: #0277BD; padding: 8px 16px; color: white; border: none; border-radius: 4px; cursor: pointer;">Change Language</button>
 </div>
 
-<h2>个人信息</h2>
+<h2>Personal Information</h2>
 
 <form id="form2">
 
-<label>年龄组:</label>
+<label>Age group:</label>
 <select name="age" required>
     <option value="18-25">18-25</option>
     <option value="26-35">26-35</option>
@@ -24,15 +24,15 @@
 
 <br><br>
 
-<label>性别:</label>
+<label>Gender:</label>
 <select name="gender" required>
-    <option value="Male">男</option>
-    <option value="Female">女</option>
+    <option value="Male">Male</option>
+    <option value="Female">Female</option>
 </select>
 
-<h3>对慢性病的了解</h3>
+<h3>Knowledge of Chronic Disease</h3>
 
-<label>已知疾病数:</label>
+<label>Number of diseases known:</label>
 <select name="knowledge1" required>
 <option value="0">0</option>
 <option value="1">1</option>
@@ -43,15 +43,15 @@
 
 <br><br>
 
-<label>了解预防?</label>
+<label>Know prevention?</label>
 <select name="knowledge2">
-<option>是</option>
-<option>否</option>
+<option>Yes</option>
+<option>No</option>
 </select>
 
 <br><br>
 
-<label>已知风险行为:</label>
+<label>Risk behaviours known:</label>
 <select name="knowledge3">
 <option>0</option>
 <option>1</option>
@@ -63,8 +63,8 @@
 <br><br>
 
 <div class="button-group">
-<button type="button" onclick="window.location='page1.html'">返回</button>
-<button type="submit">下一步</button>
+<button type="button" onclick="navigateToPage('page1.html')">Back</button>
+<button type="submit">Next</button>
 </div>
 
 </form>
@@ -72,7 +72,7 @@
 <script>
 function switchLanguage() {
     const langs = ['en', 'zh-simple', 'zh-trad'];
-    const currentLang = localStorage.getItem('preferredLanguage') || 'zh-simple';
+    const currentLang = localStorage.getItem('preferredLanguage') || 'en';
     const currentIndex = langs.indexOf(currentLang);
     const nextIndex = (currentIndex + 1) % langs.length;
     localStorage.setItem('preferredLanguage', langs[nextIndex]);
@@ -80,7 +80,7 @@ function switchLanguage() {
 }
 
 function navigateToPage(page) {
-    const lang = localStorage.getItem('preferredLanguage') || 'zh-simple';
+    const lang = localStorage.getItem('preferredLanguage') || 'en';
     const langSuffix = lang === 'en' ? '-en' : (lang === 'zh-trad' ? '-zh-trad' : '-zh-simple');
     const baseName = page.replace('.html', '');
     window.location.href = baseName + langSuffix + '.html';

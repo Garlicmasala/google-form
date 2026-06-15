@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Page 5 - Consent</title>
+    <title>第5頁 - 同意書</title>
     <link rel="stylesheet" href="styles.css">
     <script src="data.js"></script>
 </head>
@@ -11,10 +11,10 @@
     <button onclick="switchLanguage()" style="background: #0277BD; padding: 8px 16px; color: white; border: none; border-radius: 4px; cursor: pointer;">切換語言</button>
 </div>
 
-<h2>同意书</h2>
+<h2>同意書</h2>
 
 <p>
-我已阅读并同意参加本研究。
+我已閱讀並同意參加本研究。
 </p>
 
 <div id="summary"></div>
@@ -28,29 +28,44 @@
 
 <br><br>
 
-<h3>数字签名</h3>
-<p>请在下面的框中签名:</p>
+<h3>數字簽名</h3>
+<p>請在下面的框中簽名:</p>
 
 <canvas id="signaturePad" width="400" height="200"></canvas>
 
 <br><br>
 
-<button type="button" onclick="clearCanvas()">清除签名</button>
+<button type="button" onclick="clearCanvas()">清除簽名</button>
 
 <div class="button-group">
-<button type="button" onclick="window.location='page4.html'">返回</button>
+<button type="button" onclick="navigateToPage('page4.html')">返回</button>
 <button type="submit">提交</button>
 </div>
 
 </form>
 
 <script>
+function switchLanguage() {
+    const langs = ['en', 'zh-simple', 'zh-trad'];
+    const currentLang = localStorage.getItem('preferredLanguage') || 'zh-trad';
+    const currentIndex = langs.indexOf(currentLang);
+    const nextIndex = (currentIndex + 1) % langs.length;
+    localStorage.setItem('preferredLanguage', langs[nextIndex]);
+    location.reload();
+}
+
+function navigateToPage(page) {
+    const lang = localStorage.getItem('preferredLanguage') || 'zh-trad';
+    const langSuffix = lang === 'en' ? '-en' : (lang === 'zh-trad' ? '-zh-trad' : '-zh-simple');
+    const baseName = page.replace('.html', '');
+    window.location.href = baseName + langSuffix + '.html';
+}
+
 const canvas = document.getElementById("signaturePad");
 const ctx = canvas.getContext("2d");
 
 let drawing = false;
 
-// ====== DRAW FUNCTIONS ======
 function startDraw(e) {
     drawing = true;
     ctx.beginPath();
@@ -67,7 +82,6 @@ function stopDraw() {
     drawing = false;
 }
 
-// ====== TOUCH + MOUSE SUPPORT ======
 function getX(e) {
     return e.touches ? e.touches[0].clientX - canvas.offsetLeft : e.offsetX;
 }
@@ -76,18 +90,15 @@ function getY(e) {
     return e.touches ? e.touches[0].clientY - canvas.offsetTop : e.offsetY;
 }
 
-// Mouse events
 canvas.addEventListener("mousedown", startDraw);
 canvas.addEventListener("mousemove", draw);
 canvas.addEventListener("mouseup", stopDraw);
 canvas.addEventListener("mouseleave", stopDraw);
 
-// Touch events
 canvas.addEventListener("touchstart", startDraw);
 canvas.addEventListener("touchmove", draw);
 canvas.addEventListener("touchend", stopDraw);
 
-// ====== CLEAR ======
 function clearCanvas() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
@@ -126,32 +137,31 @@ window.addEventListener("DOMContentLoaded", function() {
     const summary = document.getElementById("summary");
 
     if (Object.keys(data).length) {
-        summary.innerHTML = "<h3>已保存的表单数据</h3><ul>" +
+        summary.innerHTML = "<h3>已保存的表單數據</h3><ul>" +
             Object.entries(data)
                 .filter(([key]) => key !== "signature")
                 .map(([key, value]) => `<li><strong>${key}</strong>: ${value}</li>`)
                 .join("") +
             "</ul>";
     } else {
-        summary.innerHTML = "<p>尚未找到已保存的回复。</p>";
+        summary.innerHTML = "<p>尚未找到已保存的回復。</p>";
     }
 });
 
-// ====== SUBMIT ======
 document.getElementById("form5").onsubmit = function(e) {
     e.preventDefault();
 
     const consent = document.querySelector('input[name="consent"]').checked;
 
     if (!consent) {
-        alert("提交前您必须同意。");
+        alert("提交前您必須同意。");
         return;
     }
 
     const signatureData = canvas.toDataURL();
 
     if (signatureData.length < 2000) {
-        alert("请提供签名。");
+        alert("請提供簽名。");
         return;
     }
 
@@ -161,9 +171,9 @@ document.getElementById("form5").onsubmit = function(e) {
     });
 
     downloadSurveyFiles(signatureData).then(() => {
-        alert("表单已成功提交!您的调查数据和签名图像已下载。");
+        alert("表單已成功提交!您的調查數據和簽名圖像已下載。");
         clearSavedData();
-        window.location.href = "page1.html";
+        window.location.href = "page0.html";
     });
 };
 </script>
